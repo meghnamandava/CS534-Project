@@ -4,12 +4,12 @@ module testbench;
 
     reg clk;
     reg rst;
-   	reg [4:0] p   = 5'd2;
-   	reg [2:0] q   = 5'd2;
+   	reg [4:0] p   = 5'd1;
+   	reg [2:0] q   = 5'd1;
    	reg [3:0] S   = 5'd3;
    	reg [4:0] R   = 5'd3;
-   	reg [4:0] r   = 5'd2;
-   	reg [4:0] t   = 5'd2;
+   	reg [4:0] r   = 5'd1;
+   	reg [4:0] t   = 5'd1;
    	reg [7:0] H  = 16'd5;
    	reg [7:0] W  = 16'd5;
 
@@ -90,11 +90,13 @@ module testbench;
         // We will create Random Values for Filter and input, then place it
         // at the right location inside the DUT Memory For it to access
         for (int i=0;i<150;i=i+1) begin
-        dut.filter_bank.filter[i] = $random%50;
+            dut.filter_bank.filter[i] = $random%50;
+            $display("filter[%d] = %h", i, dut.filter_bank.filter[i]);
         end
 
         for (int i=0;i<100;i=i+1) begin
-        dut.ifmap_bank.ifmap[i] = $random%50;
+            dut.ifmap_bank.ifmap[i] = $random%50;
+            $display("ifmap[%d] = %h", i, dut.ifmap_bank.ifmap[i]);
         end
 
         for (int i=0;i<p*t;i=i+1) begin
@@ -146,8 +148,10 @@ module testbench;
                 //$display(out_sum[i][j][k]);
                 //$display(dut.out_psum[d+p-1-i][j*(W-S+1)+k]);
                 if (out_sum[i][j][k] != dut.out_psum[d+p-1-i][j*(W-S+1)+k])  begin
-                $display("Incorrect Result");
-                test = 1'b1;
+                    $display("Incorrect Result:i[%d]j[%d]k[%d] %h, correct Result %h", i, j, k, dut.out_psum[d+p-1-i][j*(W-S+1)+k], out_sum[i][j][k]);
+                    test = 1'b1;
+                end else begin
+                    $display("CORRECT! Incorrect Result:i[%d]j[%d]k[%d] %h, correct Result %h", i, j, k, dut.out_psum[d+p-1-i][j*(W-S+1)+k], out_sum[i][j][k]);
                 end
 
             end
