@@ -11,7 +11,7 @@ always @(posedge clk) begin
         out <= 10'b0000000000;
     end
     else begin
-        if (out==size) begin
+        if (out==size-1) begin
             out <= 10'b0000000000;
         end
         else begin

@@ -29,13 +29,13 @@ reg complete, complete_d1, complete_d2, complete_d3;
 reg rst1, rst2, rst3;
 
 //counters
-counter PE_4_cycle (.clk(clk), .rst(rst), .size(10'd4), .out(four_cycle_cntr)); //PE takes 4 cycles
+counter PE_4_cycle (.clk(clk), .rst(rst1), .size(10'd4), .out(four_cycle_cntr)); //PE takes 4 cycles
 wire [9:0] pqs4;
 assign pqs4 = 4*P*Q*S;
-counter PE_pass_counter (.clk(clk), .rst(rst), .size(pqs4), .out(pass_cycle_cntr)); //PE pass calcs P*Q*S psums * 4 cycles
+counter PE_pass_counter (.clk(clk), .rst(rst2), .size(pqs4), .out(pass_cycle_cntr)); //PE pass calcs P*Q*S psums * 4 cycles
 wire [9:0] p4;
 assign p4 = 4*P;
-counter PE_filter_round_counter (.clk(clk), .rst(rst), .size(p4), .out(filter_round_cntr)); //calculate a psum for each filter, then do another round; counting cycles for one round
+counter PE_filter_round_counter (.clk(clk), .rst(rst3), .size(p4), .out(filter_round_cntr)); //calculate a psum for each filter, then do another round; counting cycles for one round
 
 //we 
 assign ifmap_spad_we = load_i;
@@ -60,12 +60,23 @@ always@(posedge start) begin
     rst2 <= 0;
     rst3 <= 0;
     p_cntr <= 5'b00000;
+    complete <= 1'b0;
 end
 
 
 //address calculation
 
 always @(posedge clk) begin
+    /*if (rst) begin
+        ifmap_spad_addr <= 4'h0;
+        filt_spad_addr <= 8'h00;
+        psum_spad_addr <= 5'b00000;
+        rst1 <= 1;
+        rst2 <= 1;
+        rst3 <= 1;
+        p_cntr <= 5'b00000;
+        complete <= 1'b0;
+    end*/
     //ld
     if (load_i) begin
         if (ifmap_spad_addr < 4'd11) begin
@@ -105,17 +116,31 @@ always @(posedge clk) begin
     complete_d2 <= complete_d1;
     complete_d3 <= complete_d2;
     compute_complete <= complete_d2 && ~complete_d3;
-end
 
-//mux selection
-assign acc_in_psum_sel = complete_d3;
-always @(*) begin
-    if (four_cycle_cntr == 2'b10 && p_cntr < P || load_f == 1'b1 || load_i == 1'b1) begin
+    //mux2 selection
+    if (four_cycle_cntr == 2'b10 && p_cntr < P) begin
         reset_acc = 1'b1;
         p_cntr = p_cntr + 1;
+    end else if (load_f == 1'b1 || load_i == 1'b1) begin
+        reset_acc = 1'b1;
+        p_cntr = 0;
     end else begin
         reset_acc = 1'b0;
     end
+end
+
+//mux1 selection
+assign acc_in_psum_sel = complete_d3;
+always @(*) begin
+    /*if (four_cycle_cntr == 2'b10 && p_cntr < P) begin
+        reset_acc = 1'b1;
+        p_cntr = p_cntr + 1;
+    end else if (load_f == 1'b1 || load_i == 1'b1) begin
+        reset_acc = 1'b1;
+        p_cntr = 0;
+    end else begin
+        reset_acc = 1'b0;
+    end*/
 
 end
 

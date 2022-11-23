@@ -4,12 +4,12 @@ module testbench;
 
     reg clk;
     reg rst;
-   	reg [4:0] p   = 5'd3;
+   	reg [4:0] p   = 5'd2;
    	reg [2:0] q   = 5'd2;
    	reg [3:0] S   = 5'd3;
    	reg [4:0] R   = 5'd3;
-   	reg [4:0] r   = 5'd3;
-   	reg [4:0] t   = 5'd4;
+   	reg [4:0] r   = 5'd2;
+   	reg [4:0] t   = 5'd2;
    	reg [7:0] H  = 16'd5;
    	reg [7:0] W  = 16'd5;
 
@@ -66,9 +66,12 @@ module testbench;
         rst=1'b1;
         #5
         clk=1'b1;
+        #20
         rst=1'b0;
         #5
         begin_layer = 1;
+        #10 
+        begin_layer = 0;
 
         #3000 $finish;
     end

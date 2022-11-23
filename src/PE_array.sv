@@ -32,7 +32,7 @@ reg [15:0] out_psum [20:0][100:0];
 reg [5:0] temp_t      = 6'b000000;
 reg [5:0] count_t     = 6'b000000;
 reg [5:0] count_p     = 6'b000000;
-reg [5:0] count_base  = 6'd0-3;
+reg [5:0] count_base  = 6'd000000;
 reg [5:0] count_col   = 6'b000000;
 
 wire e_out_psum;
@@ -50,6 +50,7 @@ reg [11:0] ipsum_mux_sel;
 
 PE_array_ctrl PE_array_ctrl(
     .clk(clk),
+    .rst(rst),
     .P(P),
     .Q(Q), 
     .S(S), 
