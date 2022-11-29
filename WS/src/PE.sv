@@ -9,8 +9,9 @@ module PE (
     output [15:0] out_filt,
     input start,
     input load_f,
-    input load_i,
-    output complete 
+    input load_i_in,
+    output reg load_i_out
+    //output complete 
 
 ) ;
 
@@ -31,14 +32,15 @@ always @(posedge clk) begin
     if (load_f) begin
         filt_reg <= in_filt;
     end 
-    else if (load_i && start) begin
+    else if (load_i_in && start) begin
         ifmap_reg <= in_ifmap;
         psum_reg <= in_psum + (filt_reg * in_ifmap);
+        load_i_out <= load_i_in;
     end 
     else begin
         //filt_reg <= 0;
         ifmap_reg <= 0;
-        psum_reg <= 0;
+        psum_reg <= in_psum;
     end
 end
 
