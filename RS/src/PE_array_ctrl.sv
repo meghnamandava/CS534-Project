@@ -47,6 +47,7 @@ module PE_array_ctrl (
             count_sets <= 0;
             rst_filt_lds <= 1'b1;
             rst_ifmap_lds <= 1'b1;
+            start <= 0;
             /*load_f <= 12'h000;
             load_i <= 12'h000;
             rst_filt_lds <= 1'b1;
@@ -60,6 +61,7 @@ module PE_array_ctrl (
             if (ready_ld_i) begin
                 load_i <= 12'hFFF >> (12-R);
                 rst_ifmap_lds <= 1'b0;
+                ready_ld_i <= 1'b0;
             //start_ifmap_lds = 1'b1;
             end
             if (begin_layer) begin
@@ -69,20 +71,21 @@ module PE_array_ctrl (
                 load_i <= 12'h000;
                 ready_ld_i <= 1'b0;
             end
-            //if we have loaded all filters
+            // //if we have loaded all filters
             if (filter_loads == S*P*Q-1) begin 
                 rst_filt_lds <= 1'b1;
                 load_f <= 12'h000;
                 count_sets <= 0;
                 ready_ld_i <= 1'b1;
-            end else begin
-                ready_ld_i <= 1'b0;
-            end
+            end 
+            // else begin
+            //     ready_ld_i <= 1'b0;
+            // end
             //if we have loaded all ifmap values
             if (ifmap_loads == S*Q-1) begin
                 count_sets <= count_sets + 1;
                 load_i <= load_i << R;
-                //rst_ifmap_lds = 1'b1;
+                rst_ifmap_lds = 1'b1;
                 if (count_sets == r*t-1) begin
                     load_i <= 12'h000;
                     //start_ifmap_lds = 1'b0;

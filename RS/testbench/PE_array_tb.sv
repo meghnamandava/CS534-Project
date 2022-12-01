@@ -68,7 +68,6 @@ module testbench;
         clk=1'b1;
         #20
         rst=1'b0;
-        #5
         begin_layer = 1;
         #10 
         begin_layer = 0;
@@ -103,7 +102,7 @@ module testbench;
                 for (int k=0;k<R;k=k+1) begin
                     for (int l=0;l<S;l=l+1) begin
                         filter[i][j][k][l] = dut.filter_bank.filter[i*(q*r*R*S)+j*(R*S) + k*S + l];
-                        $display("filter[%d] = %h(%d)", i*(p*t)+j*(q*r)+k*R+l, filter[i][j][k][l], filter[i][j][k][l]);
+                        $display("filter[%d],[%d] = %h(%d)", i*(p*t)+j*(q*r)+k*R+l, i*(q*r*R*S)+j*(R*S) + k*S + l, filter[i][j][k][l], filter[i][j][k][l]);
                     end
                 end
             end
@@ -113,7 +112,7 @@ module testbench;
             for (int j=0;j<H;j=j+1) begin
                 for (int k=0;k<W;k=k+1) begin
                     ifmap[i][j][k] = dut.ifmap_bank.ifmap[i*(H*W)+j*(W)+k];
-                    $display("ifmap[%d] = %h(%d)", i*(q*r)+j*H+k, ifmap[i][j][k], ifmap[i][j][k]);
+                    $display("ifmap[%d], [%d] = %h(%d)", i*(q*r)+j*H+k, i*(H*W)+j*(W)+k, ifmap[i][j][k], ifmap[i][j][k]);
                 end
             end
         end
@@ -154,7 +153,6 @@ module testbench;
                 end else begin
                     $display("CORRECT! Incorrect Result:i[%d]j[%d]k[%d] %h(%d), correct Result %h(%d)", i, j, k, dut.out_psum[d+p-1-i][j*(W-S+1)+k], dut.out_psum[d+p-1-i][j*(W-S+1)+k], out_sum[i][j][k], out_sum[i][j][k]);
                 end
-
             end
         end
     end

@@ -13,7 +13,7 @@ module scratchpad #(parameter ADDR=4,
 
     reg [DATA_WIDTH-1:0] spad_mem [SPADSIZE-1:0];
     integer i;
-    always @ (posedge clk) begin
+    always @ (negedge clk) begin
         if (rst) begin
             begin
                 for (i=0; i<SPADSIZE; i=i+1) spad_mem[i] <= {DATA_WIDTH{1'b0}};

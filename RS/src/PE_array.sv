@@ -116,7 +116,7 @@ filter_bank filter_bank(
     .R(R),
     .r(r),
     .t(t),
-    .en(load_f[0]), 
+    .en(load_f[0]),
     .filter_out(filter_row_con)
 );
 

@@ -40,7 +40,7 @@ module ifmap_bank (
             if (temp == 0) begin
                 if (count2<H) begin
 
-                    ifmap_out[0]      = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[0]      = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -53,7 +53,7 @@ module ifmap_bank (
 
             if (temp == 1) begin
                 if (count2<H) begin
-                    ifmap_out[1]      = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[1]      = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -66,7 +66,7 @@ module ifmap_bank (
 
             if (temp == 2) begin
                 if (count2<H) begin
-                    ifmap_out[2]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[2]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -79,7 +79,7 @@ module ifmap_bank (
 
             if (temp == 3) begin
                 if (count2<H) begin
-                    ifmap_out[3]      = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[3]      = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -92,7 +92,7 @@ module ifmap_bank (
 
             if (temp == 4) begin
                 if (count2<H) begin
-                    ifmap_out[4]      = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[4]      = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -105,7 +105,7 @@ module ifmap_bank (
 
             if (temp == 5) begin
                 if (count2<H) begin
-                    ifmap_out[5]      = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[5]      = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -118,7 +118,7 @@ module ifmap_bank (
 
             if (temp == 6) begin
                 if (count2<H) begin
-                    ifmap_out[6]      = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[6]      = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -131,7 +131,7 @@ module ifmap_bank (
 
             if (temp == 7) begin
                 if (count2<H) begin
-                    ifmap_out[7]      = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[7]      = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -144,7 +144,7 @@ module ifmap_bank (
 
             if (temp == 8) begin
                 if (count2<H) begin
-                    ifmap_out[8]      = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[8]      = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -157,7 +157,7 @@ module ifmap_bank (
 
             if (temp == 9) begin
                 if (count2<H) begin
-                    ifmap_out[9]      = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[9]      = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -170,7 +170,7 @@ module ifmap_bank (
 
             if (temp == 10) begin
                 if (count2<H) begin
-                    ifmap_out[10]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[10]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -183,7 +183,7 @@ module ifmap_bank (
 
             if (temp == 11) begin
                 if (count2<H) begin
-                    ifmap_out[11]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[11]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -196,7 +196,7 @@ module ifmap_bank (
 
             if (temp == 12) begin
                 if (count2<H) begin
-                    ifmap_out[12]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[12]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -209,7 +209,7 @@ module ifmap_bank (
 
             if (temp == 13) begin
                 if (count2<H) begin
-                    ifmap_out[13]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[13]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -222,7 +222,7 @@ module ifmap_bank (
 
             if (temp == 14) begin
                 if (count2<H) begin
-                    ifmap_out[14]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[14]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -235,7 +235,7 @@ module ifmap_bank (
 
             if (temp == 15) begin
                 if (count2<H) begin
-                    ifmap_out[15]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[15]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -248,7 +248,7 @@ module ifmap_bank (
 
             if (temp == 16) begin
                 if (count2<H) begin
-                    ifmap_out[16]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[16]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -261,7 +261,7 @@ module ifmap_bank (
 
             if (temp == 17) begin
                 if (count2<H) begin
-                    ifmap_out[17]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[17]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -274,7 +274,7 @@ module ifmap_bank (
 
             if (temp == 18) begin
                 if (count2<H) begin
-                    ifmap_out[18]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[18]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -287,7 +287,7 @@ module ifmap_bank (
 
             if (temp == 19) begin
                 if (count2<H) begin
-                    ifmap_out[19]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[19]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -300,7 +300,7 @@ module ifmap_bank (
 
             if (temp == 20) begin
                 if (count2<H) begin
-                    ifmap_out[20]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[20]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -313,7 +313,7 @@ module ifmap_bank (
 
             if (temp == 21) begin
                 if (count2<H) begin
-                    ifmap_out[21]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[21]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -326,7 +326,7 @@ module ifmap_bank (
 
             if (temp == 22) begin
                 if (count2<H) begin
-                    ifmap_out[22]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[22]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -339,7 +339,7 @@ module ifmap_bank (
 
             if (temp == 23) begin
                 if (count2<H) begin
-                    ifmap_out[23]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[23]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
@@ -352,7 +352,7 @@ module ifmap_bank (
 
             if (temp == 24) begin
                 if (count2<H) begin
-                    ifmap_out[24]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count];
+                    ifmap_out[24]     = ifmap[count_r*Q*H*W + count_q*W*H + count2*W + count_s + count-1];
                     count2  = count2+1;
                     temp    = temp+1;
                 end
