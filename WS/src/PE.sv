@@ -28,8 +28,8 @@ always @(posedge clk) begin
         filt_reg <= 0;
         ifmap_reg <= 0;
         psum_reg <= 0;
-    end
-    if (load_f) begin
+        load_i_out <= 0;
+    end else if (load_f) begin
         filt_reg <= in_filt;
     end 
     else if (load_i_in && start) begin
@@ -38,7 +38,7 @@ always @(posedge clk) begin
         load_i_out <= load_i_in;
     end 
     else begin
-        //filt_reg <= 0;
+        filt_reg <= filt_reg;
         ifmap_reg <= 0;
         psum_reg <= in_psum;
     end

@@ -25,9 +25,32 @@ wire complete_PE_con [11:0][13:0]; //connection for each PE complete signal
 wire output_done[11:0][13:0];
 
 
-wire [15:0] q  [11:0][13:0][23:0];            // Connections of output shift reg
+wire [15:0] q0  [11:0][13:0];            // Connections of output shift reg
+wire [15:0] q1  [11:0][13:0];
+wire [15:0] q2  [11:0][13:0];
+wire [15:0] q3  [11:0][13:0];
+wire [15:0] q4  [11:0][13:0];
+wire [15:0] q5  [11:0][13:0];
+wire [15:0] q6  [11:0][13:0];
+wire [15:0] q7  [11:0][13:0];
+wire [15:0] q8  [11:0][13:0];
+wire [15:0] q9  [11:0][13:0];
+wire [15:0] q10 [11:0][13:0];
+wire [15:0] q11 [11:0][13:0];
+wire [15:0] q12 [11:0][13:0];
+wire [15:0] q13 [11:0][13:0];
+wire [15:0] q14 [11:0][13:0];
+wire [15:0] q15 [11:0][13:0];
+wire [15:0] q16 [11:0][13:0];
+wire [15:0] q17 [11:0][13:0];
+wire [15:0] q18 [11:0][13:0];
+wire [15:0] q19 [11:0][13:0];
+wire [15:0] q20 [11:0][13:0];
+wire [15:0] q21 [11:0][13:0];
+wire [15:0] q22 [11:0][13:0];
+wire [15:0] q23 [11:0][13:0];
 
-reg [15:0] out_psum [20:0][100:0];
+reg [15:0] out_psum [23:0][100:0];
 
 reg [5:0] temp_t      = 6'b000000;
 reg [5:0] count_t     = 6'b000000;
@@ -100,7 +123,30 @@ generate
                                   .output_done(output_done[y][x]),
                                   .D(opsum_PE_con[y][x]),
                                   .p(P),
-                                  .q(q[y][x]));
+                                  .q0(q0[y][x]),
+                                  .q1(q1[y][x]),
+                                  .q2(q2[y][x]),
+                                  .q3(q3[y][x]),
+                                  .q4(q4[y][x]),
+                                  .q5(q5[y][x]),
+                                  .q6(q6[y][x]),
+                                  .q7(q7[y][x]),
+                                  .q8(q8[y][x]),
+                                  .q9(q9[y][x]),
+                                  .q10(q10[y][x]),
+                                  .q11(q11[y][x]),
+                                  .q12(q12[y][x]),
+                                  .q13(q13[y][x]),
+                                  .q14(q14[y][x]),
+                                  .q15(q15[y][x]),
+                                  .q16(q16[y][x]),
+                                  .q17(q17[y][x]),
+                                  .q18(q18[y][x]),
+                                  .q19(q19[y][x]),
+                                  .q20(q20[y][x]),
+                                  .q21(q21[y][x]),
+                                  .q22(q22[y][x]),
+                                  .q23(q23[y][x]));
             
         end
     end
@@ -117,7 +163,18 @@ filter_bank filter_bank(
     .r(r),
     .t(t),
     .en(load_f[0]), 
-    .filter_out(filter_row_con)
+    .filter_out0(filter_row_con[0]),
+    .filter_out1(filter_row_con[1]),
+    .filter_out2(filter_row_con[2]),
+    .filter_out3(filter_row_con[3]),
+    .filter_out4(filter_row_con[4]),
+    .filter_out5(filter_row_con[5]),
+    .filter_out6(filter_row_con[6]),
+    .filter_out7(filter_row_con[7]),
+    .filter_out8(filter_row_con[8]),
+    .filter_out9(filter_row_con[9]),
+    .filter_out10(filter_row_con[10]),
+    .filter_out11(filter_row_con[11])
 );
 
 genvar l, m;
@@ -138,7 +195,31 @@ ifmap_bank ifmap_bank (
     .H(H),
     .W(W),
     .en(|load_i),
-    .ifmap_out(ifmap_diag_con)
+    .ifmap_out0(ifmap_diag_con[0]),
+    .ifmap_out1(ifmap_diag_con[1]),
+    .ifmap_out2(ifmap_diag_con[2]),
+    .ifmap_out3(ifmap_diag_con[3]),
+    .ifmap_out4(ifmap_diag_con[4]),
+    .ifmap_out5(ifmap_diag_con[5]),
+    .ifmap_out6(ifmap_diag_con[6]),
+    .ifmap_out7(ifmap_diag_con[7]),
+    .ifmap_out8(ifmap_diag_con[8]),
+    .ifmap_out9(ifmap_diag_con[9]),
+    .ifmap_out10(ifmap_diag_con[10]),
+    .ifmap_out11(ifmap_diag_con[11]),
+    .ifmap_out12(ifmap_diag_con[12]),
+    .ifmap_out13(ifmap_diag_con[13]),
+    .ifmap_out14(ifmap_diag_con[14]),
+    .ifmap_out15(ifmap_diag_con[15]),
+    .ifmap_out16(ifmap_diag_con[16]),
+    .ifmap_out17(ifmap_diag_con[17]),
+    .ifmap_out18(ifmap_diag_con[18]),
+    .ifmap_out19(ifmap_diag_con[19]),
+    .ifmap_out20(ifmap_diag_con[20]),
+    .ifmap_out21(ifmap_diag_con[21]),
+    .ifmap_out22(ifmap_diag_con[22]),
+    .ifmap_out23(ifmap_diag_con[23]),
+    .ifmap_out24(ifmap_diag_con[24])
 );
 
 
@@ -149,53 +230,53 @@ always @(posedge clk) begin
       count_t = 0;
       if (temp_t == 0) begin
         count_p = 6'b000000;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][0];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q0[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][1];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q1[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][2];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q2[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][3];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q3[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][4];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q4[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][5];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q5[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][6];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q6[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][7];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q7[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][8];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q8[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][9];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q9[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][10];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q10[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][11];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q11[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][12];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q12[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][13];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q13[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][14];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q14[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][15];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q15[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][16];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q16[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][17];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q17[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][18];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q18[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][19];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q19[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][20];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q20[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][21];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q21[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][22];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q22[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][23];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q23[temp_t][count_col];
         count_p = count_p + 1;
 
         temp_t = temp_t + R*r;
@@ -204,53 +285,53 @@ always @(posedge clk) begin
 
       if (temp_t == 1) begin
         count_p = 6'b000000;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][0];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q0[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][1];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q1[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][2];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q2[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][3];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q3[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][4];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q4[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][5];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q5[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][6];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q6[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][7];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q7[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][8];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q8[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][9];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q9[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][10];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q10[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][11];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q11[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][12];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q12[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][13];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q13[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][14];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q14[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][15];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q15[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][16];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q16[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][17];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q17[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][18];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q18[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][19];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q19[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][20];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q20[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][21];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q21[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][22];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q22[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][23];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q23[temp_t][count_col];
         count_p = count_p + 1;
 
         temp_t = temp_t + R*r;
@@ -259,53 +340,53 @@ always @(posedge clk) begin
 
       if (temp_t == 2) begin
         count_p = 6'b000000;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][0];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q0[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][1];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q1[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][2];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q2[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][3];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q3[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][4];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q4[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][5];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q5[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][6];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q6[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][7];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q7[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][8];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q8[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][9];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q9[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][10];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q10[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][11];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q11[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][12];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q12[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][13];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q13[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][14];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q14[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][15];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q15[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][16];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q16[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][17];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q17[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][18];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q18[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][19];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q19[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][20];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q20[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][21];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q21[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][22];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q22[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][23];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q23[temp_t][count_col];
         count_p = count_p + 1;
 
         temp_t = temp_t + R*r;
@@ -314,53 +395,53 @@ always @(posedge clk) begin
 
       if (temp_t == 3) begin
         count_p = 6'b000000;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][0];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q0[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][1];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q1[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][2];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q2[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][3];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q3[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][4];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q4[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][5];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q5[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][6];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q6[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][7];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q7[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][8];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q8[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][9];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q9[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][10];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q10[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][11];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q11[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][12];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q12[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][13];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q13[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][14];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q14[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][15];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q15[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][16];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q16[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][17];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q17[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][18];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q18[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][19];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q19[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][20];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q20[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][21];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q21[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][22];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q22[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][23];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q23[temp_t][count_col];
         count_p = count_p + 1;
 
         temp_t = temp_t + R*r;
@@ -369,53 +450,53 @@ always @(posedge clk) begin
 
       if (temp_t == 4) begin
         count_p = 6'b000000;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][0];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q0[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][1];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q1[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][2];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q2[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][3];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q3[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][4];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q4[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][5];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q5[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][6];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q6[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][7];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q7[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][8];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q8[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][9];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q9[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][10];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q10[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][11];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q11[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][12];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q12[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][13];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q13[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][14];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q14[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][15];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q15[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][16];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q16[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][17];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q17[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][18];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q18[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][19];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q19[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][20];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q20[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][21];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q21[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][22];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q22[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][23];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q23[temp_t][count_col];
         count_p = count_p + 1;
 
         temp_t = temp_t + R*r;
@@ -424,53 +505,53 @@ always @(posedge clk) begin
 
       if (temp_t == 5) begin
         count_p = 6'b000000;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][0];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q0[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][1];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q1[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][2];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q2[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][3];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q3[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][4];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q4[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][5];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q5[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][6];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q6[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][7];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q7[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][8];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q8[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][9];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q9[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][10];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q10[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][11];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q11[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][12];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q12[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][13];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q13[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][14];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q14[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][15];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q15[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][16];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q16[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][17];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q17[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][18];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q18[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][19];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q19[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][20];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q20[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][21];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q21[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][22];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q22[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][23];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q23[temp_t][count_col];
         count_p = count_p + 1;
 
         temp_t = temp_t + R*r;
@@ -479,53 +560,53 @@ always @(posedge clk) begin
 
       if (temp_t == 6) begin
         count_p = 6'b000000;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][0];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q0[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][1];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q1[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][2];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q2[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][3];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q3[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][4];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q4[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][5];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q5[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][6];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q6[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][7];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q7[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][8];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q8[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][9];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q9[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][10];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q10[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][11];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q11[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][12];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q12[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][13];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q13[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][14];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q14[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][15];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q15[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][16];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q16[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][17];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q17[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][18];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q18[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][19];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q19[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][20];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q20[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][21];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q21[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][22];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q22[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][23];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q23[temp_t][count_col];
         count_p = count_p + 1;
 
         temp_t = temp_t + R*r;
@@ -534,53 +615,53 @@ always @(posedge clk) begin
 
       if (temp_t == 7) begin
         count_p = 6'b000000;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][0];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q0[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][1];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q1[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][2];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q2[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][3];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q3[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][4];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q4[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][5];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q5[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][6];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q6[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][7];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q7[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][8];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q8[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][9];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q9[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][10];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q10[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][11];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q11[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][12];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q12[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][13];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q13[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][14];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q14[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][15];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q15[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][16];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q16[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][17];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q17[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][18];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q18[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][19];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q19[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][20];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q20[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][21];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q21[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][22];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q22[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][23];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q23[temp_t][count_col];
         count_p = count_p + 1;
 
         temp_t = temp_t + R*r;
@@ -589,53 +670,53 @@ always @(posedge clk) begin
 
       if (temp_t == 8) begin
         count_p = 6'b000000;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][0];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q0[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][1];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q1[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][2];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q2[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][3];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q3[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][4];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q4[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][5];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q5[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][6];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q6[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][7];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q7[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][8];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q8[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][9];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q9[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][10];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q10[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][11];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q11[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][12];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q12[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][13];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q13[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][14];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q14[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][15];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q15[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][16];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q16[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][17];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q17[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][18];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q18[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][19];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q19[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][20];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q20[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][21];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q21[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][22];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q22[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][23];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q23[temp_t][count_col];
         count_p = count_p + 1;
 
         temp_t = temp_t + R*r;
@@ -644,53 +725,53 @@ always @(posedge clk) begin
 
       if (temp_t == 9) begin
         count_p = 6'b000000;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][0];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q0[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][1];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q1[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][2];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q2[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][3];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q3[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][4];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q4[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][5];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q5[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][6];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q6[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][7];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q7[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][8];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q8[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][9];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q9[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][10];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q10[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][11];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q11[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][12];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q12[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][13];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q13[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][14];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q14[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][15];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q15[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][16];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q16[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][17];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q17[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][18];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q18[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][19];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q19[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][20];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q20[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][21];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q21[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][22];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q22[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][23];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q23[temp_t][count_col];
         count_p = count_p + 1;
 
         temp_t = temp_t + R*r;
@@ -699,53 +780,53 @@ always @(posedge clk) begin
 
       if (temp_t == 10) begin
         count_p = 6'b000000;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][0];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q0[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][1];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q1[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][2];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q2[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][3];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q3[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][4];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q4[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][5];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q5[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][6];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q6[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][7];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q7[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][8];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q8[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][9];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q9[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][10];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q10[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][11];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q11[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][12];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q12[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][13];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q13[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][14];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q14[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][15];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q15[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][16];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q16[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][17];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q17[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][18];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q18[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][19];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q19[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][20];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q20[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][21];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q21[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][22];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q22[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][23];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q23[temp_t][count_col];
         count_p = count_p + 1;
 
         temp_t = temp_t + R*r;
@@ -754,53 +835,53 @@ always @(posedge clk) begin
 
       if (temp_t == 11) begin
         count_p = 6'b000000;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][0];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q0[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][1];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q1[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][2];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q2[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][3];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q3[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][4];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q4[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][5];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q5[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][6];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q6[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][7];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q7[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][8];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q8[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][9];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q9[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][10];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q10[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][11];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q11[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][12];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q12[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][13];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q13[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][14];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q14[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][15];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q15[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][16];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q16[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][17];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q17[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][18];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q18[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][19];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q19[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][20];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q20[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][21];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q21[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][22];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q22[temp_t][count_col];
         count_p = count_p + 1;
-        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q[temp_t][count_col][23];
+        out_psum[count_t*P + count_p][count_col*(W-S+1) + count_base] = q23[temp_t][count_col];
         count_p = count_p + 1;
 
         temp_t = temp_t + R*r;

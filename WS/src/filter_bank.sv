@@ -7,8 +7,25 @@ module filter_bank (
     input [3:0] P,    // # filters processed by array
     input [3:0] Q,    // # filter elems processed by column
     input en,
-    output reg [15:0] filter_out [13:0]
+    output [15:0] filter_out0, filter_out1, filter_out2, filter_out3, filter_out4, filter_out5, filter_out6, filter_out7, filter_out8, filter_out9, filter_out10, filter_out11, filter_out12, filter_out13
 );
+
+    reg [15:0] filter_out [13:0];
+
+    assign filter_out0 = filter_out[0];
+    assign filter_out1 = filter_out[1];
+    assign filter_out2 = filter_out[2];
+    assign filter_out3 = filter_out[3];
+    assign filter_out4 = filter_out[4];
+    assign filter_out5 = filter_out[5];
+    assign filter_out6 = filter_out[6];
+    assign filter_out7 = filter_out[7];
+    assign filter_out8 = filter_out[8];
+    assign filter_out9 = filter_out[9];
+    assign filter_out10 = filter_out[10];
+    assign filter_out11 = filter_out[11];
+    assign filter_out12 = filter_out[12];
+    assign filter_out13 = filter_out[13];
 
     wire [6:0] filter_size; //max size 121
     assign filter_size = R*S;
@@ -22,18 +39,31 @@ module filter_bank (
     reg [9:0] count_C = 10'd0; // until channels_in_pass
     reg [9:0] count_filtsize = 10'd0;
 
+    integer i;
+
     always @(posedge clk) begin
         if (rst) begin
             count_P = 0;
             //count_Q = 0;
             count_C = 0; 
             count_filtsize = 0;
-        end
-        if (en) begin
+            for (i = 0; i < 14; i=i+1) begin
+                filter_out[i] <= 16'h0000;
+            end
+        end else if (en) begin
             // for each column output first elem of each filter until P in a single channel
             // next elem until reach R*S, en (load_f) should count until Q
             count_P = 0;
-            if (count_P < P) 
+            
+            for (i = 0; i < 14; i=i+1) begin
+                //if (i >= 14-Q) begin
+                    if (count_P < P) begin
+                        filter_out[i] <= filter[count_C*P*filter_size+count_P*filter_size+count_filtsize];
+                    end
+                    count_P = count_P + 1;
+                //end
+            end
+            /*if (count_P < P) 
                 filter_out[0] <= filter[count_C*P*filter_size+count_P*filter_size+count_filtsize];
             count_P = count_P + 1;
             if (count_P < P) 
@@ -74,7 +104,7 @@ module filter_bank (
             count_P = count_P + 1;
             if (count_P < P) 
                 filter_out[13] <= filter[count_C*P*filter_size+count_P*filter_size+count_filtsize];
-            count_P = count_P + 1;
+            count_P = count_P + 1;*/
          
             if (count_filtsize == filter_size-1) begin
                 count_filtsize = 0;

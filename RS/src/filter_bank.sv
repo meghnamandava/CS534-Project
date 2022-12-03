@@ -7,8 +7,10 @@ module filter_bank (
     input [4:0] r, //# PE sets in array Proc diff channels of a filter
     input [4:0] t, //# PE sets in array Proc different filters
     input en,
-    output reg [15:0] filter_out [11:0]
+    output [15:0] filter_out0, filter_out1, filter_out2, filter_out3, filter_out4, filter_out5, filter_out6, filter_out7, filter_out8, filter_out9, filter_out10, filter_out11
 );
+
+    reg [15:0] filter_out [11:0];
 
     wire [6:0] filter_size; //max size 121
     assign filter_size = R*S;
@@ -21,6 +23,19 @@ module filter_bank (
     reg [9:0] count_R = 10'd0;
     reg [9:0] count_r = 10'd0;
     reg [9:0] count_t = 10'd0;  
+ 
+    assign filter_out0 = filter_out[0];
+    assign filter_out1 = filter_out[1];
+    assign filter_out2 = filter_out[2];
+    assign filter_out3 = filter_out[3];
+    assign filter_out4 = filter_out[4];
+    assign filter_out5 = filter_out[5];
+    assign filter_out6 = filter_out[6];
+    assign filter_out7 = filter_out[7];
+    assign filter_out8 = filter_out[8];
+    assign filter_out9 = filter_out[9];
+    assign filter_out10 = filter_out[10];
+    assign filter_out11 = filter_out[11];
 
     always @(posedge clk) begin
         if (en) begin

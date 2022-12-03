@@ -6,8 +6,10 @@ module ifmap_bank (
     input [4:0] r, //# PE sets in array proc diff channels of a filter
     input [7:0] H, W, //height and width of filter
     input en,
-    output reg [15:0] ifmap_out [24:0]
+    output [15:0] ifmap_out0, ifmap_out1, ifmap_out2, ifmap_out3, ifmap_out4, ifmap_out5, ifmap_out6, ifmap_out7, ifmap_out8, ifmap_out9, ifmap_out10, ifmap_out11, ifmap_out12, ifmap_out13, ifmap_out14, ifmap_out15, ifmap_out16, ifmap_out17, ifmap_out18, ifmap_out19, ifmap_out20, ifmap_out21, ifmap_out22, ifmap_out23, ifmap_out24
 );
+
+    reg [15:0] ifmap_out [24:0];
 
     reg [15:0] ifmap [51528:0]; //max H/W is 227
 
@@ -19,6 +21,32 @@ module ifmap_bank (
     reg [9:0] temp    = 10'd0;
 
     reg [3:0]   pe_set_base = 4'b0000; // PE set base value which gets incremented by r after each Q*s cycles
+
+    assign ifmap_out0 = ifmap_out[0];
+    assign ifmap_out1 = ifmap_out[1];
+    assign ifmap_out2 = ifmap_out[2];
+    assign ifmap_out3 = ifmap_out[3];
+    assign ifmap_out4 = ifmap_out[4];
+    assign ifmap_out5 = ifmap_out[5];
+    assign ifmap_out6 = ifmap_out[6];
+    assign ifmap_out7 = ifmap_out[7];
+    assign ifmap_out8 = ifmap_out[8];
+    assign ifmap_out9 = ifmap_out[9];
+    assign ifmap_out10 = ifmap_out[10];
+    assign ifmap_out11 = ifmap_out[11];
+    assign ifmap_out12 = ifmap_out[12];
+    assign ifmap_out13 = ifmap_out[13];
+    assign ifmap_out14 = ifmap_out[14];
+    assign ifmap_out15 = ifmap_out[15];
+    assign ifmap_out16 = ifmap_out[16];
+    assign ifmap_out17 = ifmap_out[17];
+    assign ifmap_out18 = ifmap_out[18];
+    assign ifmap_out19 = ifmap_out[19];
+    assign ifmap_out20 = ifmap_out[20];
+    assign ifmap_out21 = ifmap_out[21];
+    assign ifmap_out22 = ifmap_out[22];
+    assign ifmap_out23 = ifmap_out[23];
+    assign ifmap_out24 = ifmap_out[24];
 
     always @(posedge en) begin
 

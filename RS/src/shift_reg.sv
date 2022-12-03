@@ -12,13 +12,37 @@ module shift_reg (
   input clk,complete,
   input [15:0] D,
   input [4:0] p,
-  output [15:0] q [23:0],
+  output [15:0] q0,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,
   output reg output_done = 1'b0
 );
 
-
-  //reg [3:0] d [23:0]; // input wire of the 24 registers
-  wire [15:0] q [23:0]; // output wire of the 24 registers
+ //reg [3:0] d [23:0]; // input wire of the 24 registers
+  reg [15:0] q [23:0]; // output wire of the 24 registers
+  
+  assign q0 = q[0];
+  assign q1 = q[1];
+  assign q2 = q[2];
+  assign q3 = q[3];
+  assign q4 = q[4];
+  assign q5 = q[5];
+  assign q6 = q[6];
+  assign q7 = q[7];
+  assign q8 = q[8];
+  assign q9 = q[9];
+  assign q10 = q[10];
+  assign q11 = q[11];
+  assign q12 = q[12];
+  assign q13 = q[13];
+  assign q14 = q[14];
+  assign q15 = q[15];
+  assign q16 = q[16];
+  assign q17 = q[17];
+  assign q18 = q[18];
+  assign q19 = q[19];
+  assign q20 = q[20];
+  assign q21 = q[21];
+  assign q22 = q[22];
+  assign q23 = q[23];
 
   reg en = 0;
   //wire en;
